@@ -80,13 +80,17 @@ export class AdminCitas implements OnInit {
     this.modal.show();
   }
 
-  guardarCita(): void {
-    if (this.accionModal.toUpperCase() === 'GUARDAR') {
-      this.agregarCita();
-    } else {
-      this.actualizarCita();
-    }
+ guardarCita(): void {
+  if (!this.fechaHora || !this.motivo || this.idMascota === 0 || this.idVeterinario === 0) {
+    alert('Por favor completa todos los campos obligatorios.');
+    return;
   }
+  if (this.accionModal.toUpperCase() === 'GUARDAR') {
+    this.agregarCita();
+  } else {
+    this.actualizarCita();
+  }
+}
 
   agregarCita(): void {
     const cita: Cita = new Cita(

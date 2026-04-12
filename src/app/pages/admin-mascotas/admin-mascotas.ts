@@ -80,6 +80,10 @@ export class AdminMascotas implements OnInit {
   }
 
   guardarMascota(): void {
+    if (!this.nombre || this.idCliente === 0 || this.idTipoMascota === 0) {
+      alert('Por favor completa todos los campos obligatorios.');
+      return;
+    }
     if (this.accionModal.toUpperCase() === 'GUARDAR') {
       this.agregarMascota();
     } else {

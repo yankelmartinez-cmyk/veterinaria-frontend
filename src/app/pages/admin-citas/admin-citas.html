@@ -1,0 +1,111 @@
+<div class="container py-4">
+
+  <!-- Encabezado -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">🗓️ Gestión de Citas</h2>
+    <button class="btn btn-primary" (click)="abrirModalAgregar()">
+      + Agregar Cita
+    </button>
+  </div>
+
+  <!-- Tabla -->
+  <div class="card">
+    <div class="card-header">
+      Citas Registradas
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Fecha y Hora</th>
+            <th>Mascota</th>
+            <th>Veterinario</th>
+            <th>Motivo</th>
+            <th>Diagnóstico</th>
+            <th>Estado</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of citas">
+            <td>{{ cita.id }}</td>
+            <td>{{ formatearFecha(cita.fechaHora) }}</td>
+            <td>{{ getNombreMascota(cita.idMascota) }}</td>
+            <td>{{ getNombreVeterinario(cita.idVeterinario) }}</td>
+            <td>{{ cita.motivo }}</td>
+            <td>{{ cita.diagnostico || '—' }}</td>
+            <td>
+              <span [class]="cita.activo ? 'badge-activo' : 'badge-inactivo'">
+                {{ cita.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td class="text-center">
+              <div class="d-flex gap-2 justify-content-center">
+                <button class="btn btn-warning btn-sm" (click)="abrirModalEditar(cita)">
+                  Editar
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="eliminarCita(cita.id)">
+                  Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalCitas" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ accionModal }} Cita</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="form-label">Fecha y Hora *</label>
+            <input type="datetime-local" class="form-control" [(ngModel)]="fechaHora">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Motivo *</label>
+            <input type="text" class="form-control" placeholder="Ej: Vacunación anual" [(ngModel)]="motivo">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Mascota *</label>
+            <select class="form-select" [(ngModel)]="idMascota">
+              <option [value]="0" disabled>-- Seleccionar mascota --</option>
+              <option *ngFor="let m of mascotas" [value]="m.id">{{ m.nombre }}</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Veterinario *</label>
+            <select class="form-select" [(ngModel)]="idVeterinario">
+              <option [value]="0" disabled>-- Seleccionar veterinario --</option>
+              <option *ngFor="let v of veterinarios" [value]="v.id">{{ v.nombre }} {{ v.apellido }}</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Diagnóstico <span class="text-muted">(opcional)</span></label>
+            <textarea class="form-control" rows="2" placeholder="Diagnóstico..." [(ngModel)]="diagnostico"></textarea>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="guardarCita()">{{ accionModal }}</button>
+      </div>
+    </div>
+  </div>
+</div>

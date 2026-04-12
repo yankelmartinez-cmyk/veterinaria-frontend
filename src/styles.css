@@ -1,1 +1,176 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-base:      #f7f9f4;
+  --bg-card:      #ffffff;
+  --accent:       #2d8a57;
+  --accent-hover: #236e45;
+  --accent-light: #e8f5ee;
+  --text:         #1e2d24;
+  --text-muted:   #7a9282;
+  --border:       #d4e9d9;
+  --warning:      #c17d10;
+  --danger:       #c0392b;
+  --radius:       10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.navbar {
+  background-color: #ffffff !important;
+  border-bottom: 2px solid var(--accent);
+  padding: 0.6rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(45, 138, 87, 0.08);
+}
+.navbar-brand {
+  color: var(--accent) !important;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+.nav-link { color: #4a6655 !important; font-weight: 500; transition: color 0.2s; }
+.nav-link:hover, .nav-link.active { color: var(--accent) !important; }
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(45, 138, 87, 0.07);
+}
+.card-header {
+  background-color: var(--accent-light);
+  border-radius: var(--radius) var(--radius) 0 0 !important;
+  color: var(--accent);
+  font-weight: 600;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.table { color: var(--text); margin-bottom: 0; }
+.table thead th {
+  background-color: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-color: var(--border);
+  padding: 0.85rem 1rem;
+}
+.table tbody td {
+  border-color: #eef4f0;
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  color: #2c3e30;
+}
+.table tbody tr:hover td { background-color: #f2f8f4; }
+
+.form-control, .form-select {
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.92rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(45, 138, 87, 0.15);
+  color: var(--text);
+  background-color: #ffffff;
+}
+.form-control::placeholder { color: var(--text-muted); }
+.form-label {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.88rem;
+  margin-bottom: 0.35rem;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+  border-radius: 8px;
+  color: #ffffff;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+.btn-warning {
+  background-color: #fff8e6;
+  border-color: #f5d78e;
+  color: var(--warning);
+  font-weight: 600;
+  border-radius: 8px;
+}
+.btn-warning:hover { background-color: #fef0cc; color: var(--warning); }
+
+.btn-danger {
+  background-color: #fef0f0;
+  border-color: #f5b7b1;
+  color: var(--danger);
+  font-weight: 600;
+  border-radius: 8px;
+}
+.btn-danger:hover { background-color: #fde0de; color: var(--danger); }
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+  font-weight: 600;
+  border-radius: 8px;
+}
+.btn-secondary:hover { background-color: var(--accent-light); color: var(--accent); }
+
+h2, h3, h4, h5 { color: var(--accent); }
+
+.badge-activo {
+  background-color: #e8f5ee;
+  color: var(--accent);
+  border: 1px solid #b7dfc8;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.badge-inactivo {
+  background-color: #fef0f0;
+  border: 1px solid #f5b7b1;
+  color: var(--danger);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.alert-danger {
+  background-color: #fef0f0;
+  border-color: #f5b7b1;
+  color: #a93226;
+  border-radius: 8px;
+}
+.alert-success {
+  background-color: #e8f5ee;
+  border-color: #b7dfc8;
+  color: #1e6e3d;
+  border-radius: 8px;
+}
+
+.page-container {
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.angular",
+    "\\public",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\models",
+    "\\src\\app\\pages",
+    "\\src\\app\\pages\\admin-citas",
+    "\\src\\app\\pages\\admin-veterinarios",
+    "\\src\\app\\services"
+  ],
+  "SelectedNode": "\\src\\app\\services\\api-veterinaria.ts",
+  "PreviewInSolutionExplorer": false
+}

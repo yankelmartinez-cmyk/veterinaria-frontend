@@ -1,0 +1,93 @@
+<div class="container py-4">
+
+  <!-- Encabezado -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">🐾 Gestión de Veterinarios</h2>
+    <button class="btn btn-primary" (click)="abrirModalAgregar()">
+      + Agregar Veterinario
+    </button>
+  </div>
+
+  <!-- Tabla -->
+  <div class="card">
+    <div class="card-header">
+      Veterinarios Registrados
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Especialidad</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of veterinarios">
+            <td>{{ v.id }}</td>
+            <td>{{ v.nombre }}</td>
+            <td>{{ v.apellido }}</td>
+            <td>{{ v.especialidad || '—' }}</td>
+            <td>{{ v.telefono || '—' }}</td>
+            <td>
+              <span [class]="v.activo ? 'badge-activo' : 'badge-inactivo'">
+                {{ v.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td class="text-center">
+              <div class="d-flex gap-2 justify-content-center">
+                <button class="btn btn-warning btn-sm" (click)="abrirModalEditar(v)">
+                  Editar
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="eliminarVeterinario(v.id)">
+                  Eliminar
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalVeterinarios" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ accionModal }} Veterinario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Nombre *</label>
+            <input type="text" class="form-control" placeholder="Ej: Carlos" [(ngModel)]="nombre">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Apellido *</label>
+            <input type="text" class="form-control" placeholder="Ej: López" [(ngModel)]="apellido">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Especialidad <span class="text-muted">(opcional)</span></label>
+            <input type="text" class="form-control" placeholder="Ej: Cirugía" [(ngModel)]="especialidad">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Teléfono <span class="text-muted">(opcional)</span></label>
+            <input type="text" class="form-control" placeholder="Ej: 99999999" [(ngModel)]="telefono">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="guardarVeterinario()">{{ accionModal }}</button>
+      </div>
+    </div>
+  </div>
+</div>

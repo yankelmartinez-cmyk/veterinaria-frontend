@@ -11,11 +11,7 @@ import { TipoMascota } from '../models/tipo-mascota.model';
 })
 export class ApiVeterinaria {
 
-<<<<<<< HEAD
   private apiUrl = "https://localhost:7044/api" 
-=======
-  private apiUrl = "https://localhost:7044/api"
->>>>>>> 8fa98216bb59fba37d8a5c1aca606cf55031f6fc
 
   constructor(private httpClient: HttpClient) {}
 

@@ -54,6 +54,10 @@ export class AdminVeterinarios implements OnInit {
   }
 
   guardarVeterinario(): void {
+    if (!this.nombre || !this.apellido) {
+      alert('Por favor completa todos los campos obligatorios.');
+      return;
+    }
     if (this.accionModal.toUpperCase() === 'GUARDAR') {
       this.agregarVeterinario();
     } else {

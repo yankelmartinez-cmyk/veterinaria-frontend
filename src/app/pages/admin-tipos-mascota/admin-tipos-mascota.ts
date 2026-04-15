@@ -54,6 +54,11 @@ export class AdminTiposMascota implements OnInit {
   }
 
   guardarTipoMascota(): void {
+    if (!this.nombre || this.nombre.trim() === '') {
+      alert('Por favor completa todos los campos obligatorios.');
+      return;
+    }
+
     if (this.accionModal.toUpperCase() === 'GUARDAR') {
       this.agregarTipoMascota();
     } else {

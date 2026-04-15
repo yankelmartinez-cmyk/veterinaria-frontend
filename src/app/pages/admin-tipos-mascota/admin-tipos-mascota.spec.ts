@@ -8,7 +8,7 @@ describe('AdminTiposMascota', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminTiposMascota],
+      imports: [AdminTiposMascota]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminTiposMascota);

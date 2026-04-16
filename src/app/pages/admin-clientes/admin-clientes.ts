@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +17,6 @@ declare var bootstrap: any;
 export class AdminClientes implements OnInit {
 
   public clientes: Cliente[] = [];
-
   public clienteId: number = 0;
   public nombre: string = '';
   public apellido: string = '';
@@ -24,14 +24,11 @@ export class AdminClientes implements OnInit {
   public correo: string = '';
   public direccion: string = '';
   public accionModal: string = 'Guardar';
-
   public modal: any;
 
   constructor(private api: ApiVeterinaria, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
-    this.obtenerClientes();
-  }
+  ngOnInit(): void { this.obtenerClientes(); }
 
   ngAfterViewInit() {
     const modal = document.getElementById('modalClientes');
@@ -40,10 +37,7 @@ export class AdminClientes implements OnInit {
 
   obtenerClientes() {
     this.api.obtenerClientes().subscribe({
-      next: (data) => {
-        this.clientes = data;
-        this.cdr.detectChanges();
-      },
+      next: (data) => { this.clientes = data; this.cdr.detectChanges(); },
       error: (error) => { console.log(error); }
     });
   }
@@ -56,7 +50,12 @@ export class AdminClientes implements OnInit {
 
   guardarCliente(): void {
     if (!this.nombre || !this.apellido) {
-      alert('Por favor completa todos los campos obligatorios.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos obligatorios',
+        text: 'Por favor completa todos los campos obligatorios.',
+        confirmButtonText: 'Aceptar'
+      });
       return;
     }
     if (this.accionModal.toUpperCase() === 'GUARDAR') {
@@ -67,43 +66,17 @@ export class AdminClientes implements OnInit {
   }
 
   agregarCliente(): void {
-    const cliente: Cliente = new Cliente(
-      0,
-      this.nombre,
-      this.apellido,
-      this.telefono || null,
-      this.correo || null,
-      this.direccion || null,
-      true,
-      new Date()
-    );
-
+    const cliente: Cliente = new Cliente(0, this.nombre, this.apellido, this.telefono || null, this.correo || null, this.direccion || null, true, new Date());
     this.api.agregarCliente(cliente).subscribe({
-      next: () => {
-        this.obtenerClientes();
-        this.modal.hide();
-      },
+      next: () => { this.obtenerClientes(); this.modal.hide(); },
       error: (error) => { console.log(error); }
     });
   }
 
   actualizarCliente(): void {
-    const cliente: Cliente = new Cliente(
-      this.clienteId,
-      this.nombre,
-      this.apellido,
-      this.telefono || null,
-      this.correo || null,
-      this.direccion || null,
-      true,
-      new Date()
-    );
-
+    const cliente: Cliente = new Cliente(this.clienteId, this.nombre, this.apellido, this.telefono || null, this.correo || null, this.direccion || null, true, new Date());
     this.api.actualizarCliente(this.clienteId, cliente).subscribe({
-      next: () => {
-        this.obtenerClientes();
-        this.modal.hide();
-      },
+      next: () => { this.obtenerClientes(); this.modal.hide(); },
       error: (error) => { console.log(error); }
     });
   }

@@ -5,6 +5,7 @@ import { ApiVeterinaria } from '../../services/api-veterinaria';
 import { Cita } from '../../models/cita.model';
 import { Mascota } from '../../models/mascota.model';
 import { Veterinario } from '../../models/veterinario.model';
+import Swal from 'sweetalert2';
 
 declare var bootstrap: any;
 
@@ -81,6 +82,16 @@ export class AdminCitas implements OnInit {
   }
 
   guardarCita(): void {
+    if (!this.fechaHora || !this.motivo || this.idMascota === 0 || this.idVeterinario === 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos obligatorios',
+        text: 'Por favor completa todos los campos obligatorios.',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
     if (this.accionModal.toUpperCase() === 'GUARDAR') {
       this.agregarCita();
     } else {

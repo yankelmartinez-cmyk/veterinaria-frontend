@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiVeterinaria } from '../../services/api-veterinaria';
 import { TipoMascota } from '../../models/tipo-mascota.model';
+import Swal from 'sweetalert2';
 
 declare var bootstrap: any;
 
@@ -55,7 +56,12 @@ export class AdminTiposMascota implements OnInit {
 
   guardarTipoMascota(): void {
     if (!this.nombre || this.nombre.trim() === '') {
-      alert('Por favor completa todos los campos obligatorios.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos obligatorios',
+        text: 'Por favor completa todos los campos obligatorios.',
+        confirmButtonText: 'Aceptar'
+      });
       return;
     }
 
